@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Item from './Item'
 
 
 function ItemList() {
-    const [ItemDb,setDbItem] = useState([
+
+    const DbList =[
         {
             id:1  ,
             title : "vehiculo",
@@ -23,12 +24,41 @@ function ItemList() {
             desc  : 'carro veloz',
             picUrl: "https://api.lorem.space/image/car?4" 
         }
-    ])
+    ]
+
+    const [ItemDb,setDbItem] = useState([])
+
+    useEffect(()=>{
+        const task = new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                if (ItemDb.length<1) {
+                    resolve(DbList);
+                    
+                } else{
+                    reject('Rechazado')
+                }
+            },2000)
+        })
+
+        task
+        .then(
+            res =>{
+                setDbItem(res);
+                console.log('archivos cargados')
+            }
+        )
+        .catch(
+            eRR => {
+                console.log(eRR,'Carga de datos fallada')
+            }
+        );
+    })
 
     return (
-    <ul>
+        <ul>
+        
         {ItemDb.map( x =>
-            <li>
+            <li key={x.id}>
                 <Item pic={x.picUrl} name={x.title} pre={x.price} />
             </li>
         )}

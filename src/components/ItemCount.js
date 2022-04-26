@@ -21,8 +21,8 @@ function BotonContador() {
             <h3 ><b>agregar al carrito</b></h3>
             <hr />
             <div className='flexx space-y-3.5  text-black text-xl'>
-                <button className='bg-rose-300 w-6' onClick={SubHandler}>-</button>
-                <strong className='bg-white p-1' > {cuenta} </strong>
+                <button className=' bg-rose-300 w-6' onClick={SubHandler}>-</button>
+                <strong className=' btn-square bg-white p-1' > {cuenta} </strong>
                 <button className='bg-emerald-300 w-6' onClick={Addhandler}>+</button>
             </div>
         </div>
