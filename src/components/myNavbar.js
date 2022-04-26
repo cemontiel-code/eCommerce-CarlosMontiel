@@ -1,6 +1,6 @@
 //import CartIcon from "./svg/cartIcon";
 
-const Saludo =()=>{
+const NavBar =()=>{
     return (  
     <div className="navbar bg-accent">
       <div className="navbar-start">
@@ -36,4 +36,4 @@ const Saludo =()=>{
 };
 //
 
-export default Saludo;
+export default NavBar;
