@@ -2,12 +2,36 @@ import React from 'react';
 import './App.css';
 import NavBar from './components/myNavbar';
 import ListaContendor from './components/itemListContainer';
+//import ListaContendor from './components/itemListContainer';
+import BotonContador from './components/ItemCount';
+
+import { 
+  BrowserRouter as Enrutador ,
+  Routes,
+  Route, 
+} from 'react-router-dom';
 
 
-const descripcion ='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+
 
 function App() {
   return (
+    <Enrutador>
+      <NavBar></NavBar>
+        
+
+        <ListaContendor  />        
+
+      <Routes>
+        <Route path='/:' >
+          
+        </Route>
+        <Route></Route>
+        <Route></Route>
+        <Route></Route>
+      </Routes>
+    </Enrutador>
+    /*
     <div className="App bg-stone-400 ">
          
         <NavBar />
@@ -20,7 +44,7 @@ function App() {
         
         <br/>
 
-    </div>
+    </div>*/
   );
 }
 

@@ -1,42 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import Item from './Item'
+import { DbList } from '../data/itemData'
 
 
 function ItemList() {
 
-    const DbList =[
-        {
-            id:1  ,
-            title : "vehiculo",
-            price : 20000,
-            desc  : 'carro economico',
-            picUrl: "https://api.lorem.space/image/car?0" 
-        },{
-            id:2 ,
-            title : "carro",
-            price : 28500,
-            desc  : 'carro bonito',
-            picUrl: "https://api.lorem.space/image/car?23" 
-        },{
-            id:3 ,
-            title : "automobil",
-            price : 32500,
-            desc  : 'carro veloz',
-            picUrl: "https://api.lorem.space/image/car?4" 
-        }
-    ]
+   
 
     const [ItemDb,setDbItem] = useState([])
 
     useEffect(()=>{
         const task = new Promise((resolve,reject)=>{
             setTimeout(()=>{
-                if (ItemDb.length<1) {
-                    resolve(DbList);
-                    
-                } else{
-                    reject('Rechazado')
-                }
+                resolve(DbList);
             },2000)
         })
 
@@ -55,15 +31,11 @@ function ItemList() {
     })
 
     return (
-        <ul>
-        
-        {ItemDb.map( x =>
+        ItemDb.map( x =>
             <li key={x.id}>
-                <Item pic={x.picUrl} name={x.title} pre={x.price} />
+                <Item pic={x.picUrl} name={x.title} pre={x.price} stock={x.stock} />
             </li>
-        )}
-        
-    </ul>
+        )
   )
 }
 
