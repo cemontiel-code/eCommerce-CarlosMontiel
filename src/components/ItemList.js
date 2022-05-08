@@ -1,42 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Item from './Item'
-import { DbList } from '../data/itemData'
 
-
-function ItemList() {
-
-   
-
-    const [ItemDb,setDbItem] = useState([])
-
-    useEffect(()=>{
-        const task = new Promise((resolve,reject)=>{
-            setTimeout(()=>{
-                resolve(DbList);
-            },2000)
-        })
-
-        task
-        .then(
-            res =>{
-                setDbItem(res);
-                console.log('archivos cargados')
-            }
-        )
-        .catch(
-            eRR => {
-                console.log(eRR,'Carga de datos fallada')
-            }
-        );
-    })
-
+function ItemList({category}) {
     return (
-        ItemDb.map( x =>
-            <li key={x.id}>
-                <Item pic={x.picUrl} name={x.title} pre={x.price} stock={x.stock} />
-            </li>
+
+        <div className="container mx-auto flex flex-wrap gap-4 justify-center">  
+             { categoria.map( x =>
+                    <li key={x.id}>
+                        <Item key={x.id} product={x} />
+                    </li>
+                )
+            }
+        </div>
         )
-  )
 }
 
 export default ItemList

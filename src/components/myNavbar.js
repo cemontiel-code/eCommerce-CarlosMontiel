@@ -10,9 +10,9 @@ const NavBar =()=>{
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stokeLinecap="round" stokeLinejoin="round" stokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
           </label>
           <ul tabIndex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-            <li><Link to=''>categoria #1</Link></li>
-            <li><Link to=''>Categoria #2</Link></li>
-            <li><Link to=''>Categoria #3</Link></li>
+            <li><Link to='/category/car'>vehiculos</Link></li>
+            <li><Link to='/category/part'>Partes</Link></li>
+            <li><Link to='/category/cosm'>Cosmetico</Link></li>
           </ul>
         </div>
         <button className="btn btn-ghost btn-circle" data-bs-toggle="tooltip" title="Busqueda de articulos">

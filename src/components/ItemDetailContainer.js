@@ -1,14 +1,24 @@
+import React, { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
+import { getItem } from "../data/itemData"
+import ItemDetails from "./ItemDetails";
+
 
 function ItemDetailContainer() {
 
-    const getItem = new Promise((accept,reject)=>{
+  const [ product , setProduct ] = useState({});
+  const { id } = useParams();
 
-    })
-    
+  useEffect()(()=>{
+    if (id === undefined) {
+      getItem().then((resp) => setProduct(resp))
+		} else {
+			getItem().then((resp) => setProduct(resp[id]))
+		}} , [id])
 
     return (
-    <div className='card lg:card-side w-95 p-7 bg-slate-400 shadow-sm flex'>
-        {Children}
+    <div className='container max-h-3.5 max-w-4xl'>
+        <ItemDetails Item={product} ></ItemDetails>
     </div>
   )
 }

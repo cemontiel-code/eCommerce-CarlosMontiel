@@ -1,50 +1,37 @@
-import React from 'react';
 import './App.css';
+import AppContextProvider from './components/context/AppContext';
+import React from 'react';
 import NavBar from './components/myNavbar';
 import ListaContendor from './components/itemListContainer';
-//import ListaContendor from './components/itemListContainer';
-import BotonContador from './components/ItemCount';
-
 import { 
   BrowserRouter as Enrutador ,
   Routes,
   Route, 
 } from 'react-router-dom';
-
-
-
+import CartContextProvider from './components/context/CartContext';
 
 function App() {
   return (
-    <Enrutador>
-      <NavBar></NavBar>
-        
+    <>
+      <AppContextProvider>
+        <CartContextProvider>
 
-        <ListaContendor  />        
+        <Enrutador>
+          <NavBar></NavBar>
 
-      <Routes>
-        <Route path='/:' >
-          
-        </Route>
-        <Route></Route>
-        <Route></Route>
-        <Route></Route>
-      </Routes>
-    </Enrutador>
-    /*
-    <div className="App bg-stone-400 ">
-         
-        <NavBar />
-        <br/>
-        <div className='flex'>
-        <ListaContendor carac={descripcion}  />        
+          <Routes>
+            <Route path='/' element={<ListaContendor CatName={"Tienda multiuso"} />} / >
 
-        
-        </div>
-        
-        <br/>
+            <Route path="/category/:categoryId" element={<ListaContendor CatName={this.path}/> }/>
+            <Route />
+            <Route />
+          </Routes>
+        </Enrutador>
 
-    </div>*/
+        </CartContextProvider>
+      </AppContextProvider>
+    
+    </>
   );
 }
 
