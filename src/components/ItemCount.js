@@ -2,24 +2,27 @@ import React, { useState } from 'react'
 import { useCartContext } from './context/CartContext';
 import { useAppContext } from './context/AppContext';
 
-function BotonContador( { stock, onAdd, id } ) {
-    
-    const [cuenta,setCount]=useState(0);
+const ItemCount = ({ stock, onAdd, id }) => {
+	const [count, setCount] = useState(0)
 
 	const { addToCart } = useCartContext()
-	const { products }  = useAppContext()
+	const { products } = useAppContext()
 
-    const Addhandler = () =>{
-        if(cuenta < stock)  {setCount(cuenta+1);}
-    }
+	console.log(products);
 
-    const SubHandler = () =>{
-        if(cuenta >0){
-        setCount(cuenta-1);}
+	const handleAdd = () => {
+		if (count < stock) {
+			setCount(count + 1)
+		}
+	}
+	const handleRemove = () => {
+		if (count > 0) {
+			setCount(count - 1)
+		}
+	}
 
-    }
-
-    const handleClick = (id, cantidad) => {
+	const handleClick = (id, cantidad) => {
+		console.log('saf',products)
 		const findProduct = products.find((producto) => producto.id === id)
 
 		if (!findProduct) {
@@ -31,25 +34,26 @@ function BotonContador( { stock, onAdd, id } ) {
 		onAdd(count)
 	}
 
-    return (
-        <div className='card p-2 bg-sky-600 text-white'>
-            <div className='flex items-center justify-center text-black text-xl'>
-                    <button className=' bg-rose-300 w-6 rounded-l inline-block' onClick={SubHandler}>
-                        <i className="fas fa-minus"></i>
+	return (
+        <div className='card p-2 w-2/4 bg-sky-600 text-white'>
+            <div className='flex items-center justify-center text-black '>
+                    <button className='btn w-3/12  bg-rose-400  rounded-r text-4xl' onClick={handleRemove}>
+                         -
                     </button>
-                    <strong className=' btn-square bg-white p-1' > {cuenta} </strong>
-                    <button className='bg-emerald-300 w-6 rounded-r inline-block' onClick={Addhandler}>
-                        <i className="fas fa-plus"></i>
+                    <strong className='w-6/12 h-3/4 text-center bg-white p-1' > {count} </strong>
+                    <button className='btn w-3/12 bg-emerald-500  rounded-l text-4xl ' onClick={handleAdd}>
+                        +
                     </button>
             </div>
             <hr />
-            <div>
-                <button className='btn btn-square bg-white text-black' onClick={()=>{ handleClick(id, cuenta)}}>
+            <br />
+            <div className='flex justify-center'>
+                <button className='btn btn-square w-11/12 bg-white text-black' onClick={ ()=>{handleClick(id, count)} }>
                     Agregar cantidad al carrito
                 </button>
             </div>
-        </div>
-  )
+            <br />
+        </div>)
 }
 
-export default BotonContador
+export default ItemCount

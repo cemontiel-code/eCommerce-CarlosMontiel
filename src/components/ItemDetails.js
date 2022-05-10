@@ -1,31 +1,41 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import  BotonContador from './ItemCount' 
+import { Link } from 'react-router-dom';
+import ItemCount from './ItemCount';
 
 const ItemDetails=({Item})=> {
 
     const { id ,cate ,title ,price ,desc ,stock ,picUrl } = Item;;
 
-    const [Terminar ,  setTerminar ] = useState();
+    const [terminar ,  setTerminar ] = useState(false);
 
-    const onAdd = ()=>{
-        setTerminar(true);
-        alert('agregado al carrito')
+    const onAdd = (cuenta)=>{
+        setTerminar(true)
+        console.log(cuenta)
     }
 
 
   return (
-    <div className="card lg:card-side bg-slate-200 shadow-xl">
+    <div className="card h-full lg:card-side bg-slate-200 shadow-xl">
+      <figure><img src={picUrl} alt={`${cate}, ${id} `} /></figure>
     <div className="card-body">
-      <h2 className="card-title">{title}</h2>
-      <h4 className="card-title">{price}</h4>
-      <h5 className="card-title">{stock}</h5>
+      <h2 className="card-title">hola {title}</h2>
+      <h4 >Precio : {price}</h4>
+      <h5 >disponible : {stock}</h5>
       <p>{desc}</p>
       <div className="card-actions justify-end">
-        <BotonContador/>
+      {terminar ? (
+								<Link
+									to="/cart"
+									className="btn bg-primary text-white btn-block "
+								>
+									completar compra
+								</Link>
+							) : (
+								<ItemCount stock={stock} onAdd={onAdd} id={id} />
+							)}
       </div>
     </div>
-    <figure><img src="https://api.lorem.space/image/album?w=400&h=400" alt="Album" /></figure>
+    
   </div>
   )
 }

@@ -1,24 +1,19 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { getItem } from "../../data/itemData";
+import React, { createContext, useContext, useEffect, useState } from "react"
+import { getItem } from "../../data/itemData"
 
-const AppContext = createContext();
+const AppContext = createContext()
 
-export const useAppContext = () =>{
-    useContext(AppContext)
+export const useAppContext = () => useContext(AppContext)
+
+const AppContextProvider = ({ children }) => {
+	const [products, setProducts] = useState([])
+
+	useEffect(() => {
+		getItem().then((resp) => setProducts(resp))
+	})
+	return (
+		<AppContext.Provider value={{ products }}>{children}</AppContext.Provider>
+	)
 }
 
-const AppContextProvider = ( { children } ) =>{
-     const [ items, setItems ] = useState([]); 
-
-     useEffect(()=>{
-         getItem().then((response)=>{  setItems(response) })
-     })
-
-     return (
-         <AppContext.Provider value={ {items} }>
-             {children}
-         </AppContext.Provider>
-     )
-}
-
-export default AppContextProvider;
+export default AppContextProvider
