@@ -4,13 +4,13 @@ import React from 'react';
 import NavBar from './components/myNavbar';
 import ListaContendor from './components/itemListContainer';
 import ItemDetailContainer from './components/ItemDetailContainer';
-
 import { 
   BrowserRouter as Enrutador ,
   Routes,
   Route, 
 } from 'react-router-dom';
 import CartContextProvider from './components/context/CartContext';
+import CartContainer from './components/CartContainer';
 
 function App() {
   return (
@@ -26,6 +26,8 @@ function App() {
 
             <Route path="/category/:categoryId" element={<ListaContendor CatName={'category'}/> }/>
             <Route path='/item/:id' element={ <ItemDetailContainer />} />
+            <Route path='/cart' element={ <CartContainer />} />
+
           </Routes>
         </Enrutador>
 

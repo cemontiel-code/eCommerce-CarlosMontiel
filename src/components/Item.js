@@ -12,7 +12,7 @@ const Item = ({product})=> {
                 <p>{product.desc}</p>
                 <hr/>
                 <div className="card-actions" >
-                    <Link to={`/item/${product.id}`} className='btn w-full text-white ring  bg-emerald-900 ring-slate-800 rign-offset-2' >
+                    <Link to={`/item/${product.id-1}`} className='btn w-full text-white ring  bg-emerald-900 ring-slate-800 rign-offset-2' >
                         ver mas 
                     </Link>
                 </div>

@@ -36,12 +36,12 @@ const ItemCount = ({ stock, onAdd, id }) => {
 
 	return (
         <div className='card p-2 w-2/4 bg-sky-600 text-white'>
-            <div className='flex items-center justify-center text-black '>
-                    <button className='btn w-3/12  bg-rose-400  rounded-r text-4xl' onClick={handleRemove}>
+            <div className='btn-group'>
+                    <button className='btn btn-error text-black w-3/12  bg-rose-400  rounded-r text-4xl' onClick={handleRemove}>
                          -
                     </button>
-                    <strong className='w-6/12 h-3/4 text-center bg-white p-1' > {count} </strong>
-                    <button className='btn w-3/12 bg-emerald-500  rounded-l text-4xl ' onClick={handleAdd}>
+                    <strong className='btn btn-ghost text-black rounded-l rounded-r w-6/12 h-3/4 text-center bg-white p-1' > {count} </strong>
+                    <button className='btn btn-info text-black w-3/12 bg-emerald-500  rounded-l text-4xl ' onClick={handleAdd}>
                         +
                     </button>
             </div>
