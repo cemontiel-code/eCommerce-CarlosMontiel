@@ -27,18 +27,32 @@ const ListaContendor =({CatName})=> {
   },[categoryID])
 
 
-  return (
-    <div style={style} className='card text-black bg-blue-200 card-compact shadow-xl flex'>
+  return (<>
+    <div className="hero min-h-screen">
+      <div className="hero-overlay bg-opacity-60"></div>
+      <div className="hero-content text-center text-neutral-content">
+        <div className="max-w-md">
+          <h1 className="mb-5 text-5xl font-bold">Bienvenidos </h1>
+          <p className="mb-5">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+          <button className="btn btn-primary">Get Started</button>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div style={style} className='card text-black bg-slate-100 card-compact shadow-xl flex'>
         <div className="card-body">
             <h2 className="card-title">
                {CatName}
             </h2>
-            <hr/>
+            <div className="divider"></div>
             <ul className="flex flex-wrap" >
               <ItemList className="m-5 p-5" category={category} />
             </ul>
         </div>        
     </div>
+  </>
   )
 };
 
