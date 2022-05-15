@@ -10,19 +10,18 @@ const ItemDetails=({Item})=> {
 
     const onAdd = (cuenta)=>{
         setTerminar(true)
-        console.log(cuenta)
     }
 
 
   return (
-    <div className="card h-full lg:card-side bg-slate-200 shadow-xl">
-      <figure><img src={picUrl} alt={`${cate}, ${id} `} /></figure>
+    <div className="card lg:card-side rounded-2xl w-11/12 mx-auto bg-info shadow-xl">
+      <figure><img className='h-full'  src={picUrl} alt={`${cate}, ${id} `} /></figure>
     <div className="card-body">
       <h2 className="card-title">hola {title}</h2>
       <h4 >Precio : {price}</h4>
       <h5 >disponible : {stock}</h5>
       <p>{desc}</p>
-      <div className="card-actions justify-end">
+      <div className="card-actions md:justify-end">
       {terminar ? (
 								<Link
 									to="/cart"

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { getItem } from "../data/itemData"
-import ItemDetails from "./ItemDetails";
+import ItemDetails from './ItemDetails'
 
 
 function ItemDetailContainer() {
@@ -18,8 +18,7 @@ function ItemDetailContainer() {
 		}
 	}, [id])
     return (
-    <div className='container m-auto my-5 max-h-3.5 max-w-4xl'>
-        <div>{product.getJSON}</div>
+    <div className='py-10 w-screen  bg-gray-300 '>
         <ItemDetails Item={product} ></ItemDetails>
     </div>
   )

@@ -4,7 +4,7 @@ import Item from './Item'
 function ItemList({category}) {
     return (
 
-        <div className="container mx-auto flex flex-wrap gap-4 justify-center">  
+        <div className="container mx-auto grid md:grid-cols-3 gap-5 ">  
              { category && category.map( x =>
                     <li key={x.id}>
                         <Item key={x.id} product={x} />

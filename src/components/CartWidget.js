@@ -24,7 +24,7 @@ const CartWidget= () => {
         {mia ? (
             <span className='indicator-item  indicator-start badge badge-secondary'>{cart.length}</span>
             ):(<></>)}
-            <label tabIndex="0" className="btn btn-ghost btn-circle" data-bs-toggle="tooltip" title="Categorias">
+            <label tabIndex="0" className="btn btn-accent btn-circle" data-bs-toggle="tooltip" title="Categorias">
                 <img src={carti} alt={'carrito'} className="h-5 w-5" ></img>
             </label>
             {mia ? (

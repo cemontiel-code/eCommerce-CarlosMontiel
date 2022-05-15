@@ -19,21 +19,21 @@ const CartContainer= () => {
      }, [cart] )
      
      const CalcFp =()=>{
-         let finale = 0 ;
+         let precio = 0 ;
         cart.forEach(x =>{
             let itemFull = x.price * x.quantity;
-            finale = finale +itemFull;       
+            precio = precio +itemFull;       
         })         
 
-        return finale;
+        return precio;
      }
 
      const calcFc = ()=>{
-         let final = 0;
+         let cantidad = 0;
          cart.forEach(x=>{
-             final = final + x.quantity;
+             cantidad = cantidad + x.quantity;
          })
-         return final;
+         return cantidad;
 
      }
 

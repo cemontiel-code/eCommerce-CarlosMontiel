@@ -1,9 +1,9 @@
 import './App.css';
 import AppContextProvider from './components/context/AppContext';
 import React from 'react';
-import NavBar from './components/myNavbar';
 import ListaContendor from './components/itemListContainer';
-import ItemDetailContainer from './components/ItemDetailContainer';
+import NavBar from './components/myNavbar';
+import ItemDetailContainer from './components/ItemDetailContainer'
 import { 
   BrowserRouter as Enrutador ,
   Routes,
@@ -22,9 +22,9 @@ function App() {
           <NavBar></NavBar>
 
           <Routes>
-            <Route path='/' element={<ListaContendor CatName={"Tienda multiuso"} />} / >
+            <Route path='/' element={<ListaContendor />} / >
 
-            <Route path="/category/:categoryId" element={<ListaContendor CatName={'category'}/> }/>
+            <Route path="/category/:categoryId" element={<ListaContendor /> }/>
             <Route path='/item/:id' element={ <ItemDetailContainer />} />
             <Route path='/cart' element={ <CartContainer />} />
 
