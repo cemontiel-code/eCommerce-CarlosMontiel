@@ -24,7 +24,7 @@ const NavBar =()=>{
         <Link  to='/' className="normal-case gap-2 text-center text-4xl " data-bs-toggle="tooltip" title="Tienda de Respuesto">
           Repuestos 
          de vehiculos 
-          
+           
         </Link>
       </div>
       <div className="navbar-end">
