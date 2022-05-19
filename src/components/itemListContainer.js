@@ -1,3 +1,4 @@
+import { collection,getFirestore ,getDocs } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getItem } from "../data/itemData";
@@ -9,16 +10,37 @@ const ListaContendor =()=> {
   const {categoryId} = useParams();
 
   useEffect(()=>{
+
+    const db = getFirestore();
+    console.log(db)
+
+    const itemColec = collection(db ,'items');
+
+    
+    
     if ( categoryId === undefined ) {
-       getItem().then((resp)=>{ setCategory(resp) }) 
-      }
-    else { 
-      getItem().then((resp)=> 
-      {  
-        setCategory(resp.filter((product) => product.category === categoryId));
+      getDocs(itemColec).then( (snapshot) => { 
+    /*    setCategory(snapshot.docs.map((doc)=>({
+        category : doc.category  ,
+        title : doc.title,
+        price : doc.price,
+        desc  : doc.desc,
+        stock : doc.stock,
+        }))) 
+
+        
+      */
+        console.log(snapshot.docs);
       })
     }
+    else { 
+      getDocs(itemColec).then( resp=>
+        resp.filter((product) => product.category === categoryId)
+        )
+    }
   },[categoryId])
+
+  console.log(category);
 
   const checkTitle = () => {
       switch (categoryId) {
@@ -80,7 +102,7 @@ const ListaContendor =()=> {
             </h2>
             <div className="divider"></div>
             <ul className="flex flex-wrap" >
-              <ItemList className="m-5 p-5" category={category} />
+              <ItemList className="m-5 p-5"  />
             </ul>
         </div>        
     </div>
