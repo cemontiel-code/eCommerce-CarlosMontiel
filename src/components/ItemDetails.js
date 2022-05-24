@@ -14,10 +14,10 @@ const ItemDetails=({Item})=> {
 
 
   return (
-    <div className="card lg:card-side rounded-2xl w-11/12 mx-auto bg-info shadow-xl">
+    <div className="card lg:card-side rounded-2xl w-11/12 mx-auto glass shadow-xl">
       <figure><img className='h-full'  src={picUrl} alt={`${cate}, ${id} `} /></figure>
     <div className="card-body">
-      <h2 className="card-title">hola {title}</h2>
+      <h2 className="card-title">{title}</h2>
       <h4 >Precio : {price}</h4>
       <h5 >disponible : {stock}</h5>
       <p>{desc}</p>

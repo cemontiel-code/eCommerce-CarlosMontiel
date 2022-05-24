@@ -1,26 +1,39 @@
-import { collection,getFirestore ,getDocs } from "firebase/firestore";
+//import { collection,getFirestore ,getDocs } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getItem } from "../data/itemData";
 import ItemList from "./ItemList";
+import { useAppContext } from "./context/AppContext";
 
 const ListaContendor =()=> {  
 
   const [ category, setCategory ] = useState();
   const {categoryId} = useParams();
-
+  const { products } = useAppContext();
+  
   useEffect(()=>{
 
+    if (categoryId === undefined) {  setCategory(products)  }
+    else { setCategory( products.filter( item => item.category === categoryId ) ); }
+
+
+    /*
     const db = getFirestore();
-    console.log(db)
-
     const itemColec = collection(db ,'items');
+    const getItemRef = async ()=>{
+      const data = await getDocs(itemColec)
+      if (data.size ===0) {
+          console.log('sin resultados')
+      }
+      setCategory(data.docs.map((item)=>
+        ({...item.data(),id: item.id})
+      ))
+    }
+    getItemRef();
 
-    
     
     if ( categoryId === undefined ) {
       getDocs(itemColec).then( (snapshot) => { 
-    /*    setCategory(snapshot.docs.map((doc)=>({
+        setCategory(snapshot.docs.map((doc)=>({
         category : doc.category  ,
         title : doc.title,
         price : doc.price,
@@ -29,7 +42,7 @@ const ListaContendor =()=> {
         }))) 
 
         
-      */
+     
         console.log(snapshot.docs);
       })
     }
@@ -37,8 +50,8 @@ const ListaContendor =()=> {
       getDocs(itemColec).then( resp=>
         resp.filter((product) => product.category === categoryId)
         )
-    }
-  },[categoryId])
+    }*/
+  },[categoryId,products])
 
   console.log(category);
 
@@ -102,7 +115,7 @@ const ListaContendor =()=> {
             </h2>
             <div className="divider"></div>
             <ul className="flex flex-wrap" >
-              <ItemList className="m-5 p-5"  />
+              <ItemList className="m-5 p-5" category={category}  />
             </ul>
         </div>        
     </div>

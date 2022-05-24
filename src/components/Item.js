@@ -8,11 +8,12 @@ const Item = ({product})=> {
             <div className="card-body">
                 <h2 className="card-title" > {product.title} </h2>
                 <h3 className="card-title" > <b>{product.price}$ </b> </h3>
+
                 <h3 >inventario: <b>{product.stock} </b> </h3>
                 <p>{product.desc}</p>
-                <hr/>
+                <div className='divider' />
                 <div className="card-actions" >
-                    <Link to={`/item/${product.id-1}`} className='btn w-full text-white  ring ring-slate-800 rign-offset-2' >
+                    <Link to={`/item/${product.id}`} className='btn w-full text-white  ring ring-slate-800 rign-offset-2' >
                         ver mas 
                     </Link>
                 </div>

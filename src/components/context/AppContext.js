@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react"
-import { getItem } from "../../data/itemData"
+import { collection,getFirestore ,getDocs } from "firebase/firestore";
 
 const AppContext = createContext()
 
@@ -9,7 +9,19 @@ const AppContextProvider = ({ children }) => {
 	const [products, setProducts] = useState([])
 
 	useEffect(() => {
-		getItem().then((resp) => setProducts(resp))
+		const db = getFirestore();
+		const itemColec = collection(db ,'items');
+		const getItemRef = async ()=>{
+		  const data = await getDocs(itemColec)
+		  if (data.size ===0) {
+			  console.log('sin resultados')
+		  }
+		  setProducts(data.docs.map((item)=>
+			({...item.data(),id: item.id})
+		  ))
+		}
+		getItemRef();
+	
 	})
 	return (
 		<AppContext.Provider value={{ products }}>{children}</AppContext.Provider>

@@ -46,7 +46,30 @@ const CartContextProvider = ({ children }) => {
 
 	const deleteCart = () => setCart([])
 
-	console.log(cart)
+	const CalcSubTotal =(precio, cantidad) =>{
+		let Subtotal = 0;
+		Subtotal = Subtotal +(precio*cantidad)
+		return Number(Subtotal);
+	}
+
+	const CalcPrecioFinal =() =>{
+		let precio = 0 ;
+	   cart.forEach(x =>{
+		   let itemFull = x.price * x.quantity;
+		   precio = precio +itemFull;       
+	   })         
+
+	   return precio;
+	}
+
+	const calcCantidadFinal = () =>{
+		let cantidad = 0;
+		cart.forEach(x=>{
+			cantidad = cantidad + x.quantity;
+		})
+		return cantidad;
+
+	}
 
 	return (
 		<CartContext.Provider
@@ -56,6 +79,9 @@ const CartContextProvider = ({ children }) => {
 				deleteFromCart,
 				deleteCart,
 				setCart,
+				calcCantidadFinal,
+				CalcPrecioFinal,
+				CalcSubTotal
 			}}
 		>
 			{children}

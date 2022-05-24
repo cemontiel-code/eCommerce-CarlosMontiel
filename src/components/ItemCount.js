@@ -8,6 +8,7 @@ const ItemCount = ({ stock, onAdd, id }) => {
 	const { addToCart } = useCartContext()
 	const { products } = useAppContext()
 
+	
 
 	const handleAdd = () => {
 		if (count < stock) {
@@ -33,7 +34,7 @@ const ItemCount = ({ stock, onAdd, id }) => {
 	}
 
 	return (
-        <div className='card p-2 md:w-2/4 bg-secondary-focus text-white'>
+        <div className='card p-2 md:w-2/4 bg-base text-white'>
             <div className='btn-group'>
                     <button className='btn btn-error text-black w-3/12    rounded-l-full text-4xl' onClick={handleRemove}>
                          -
