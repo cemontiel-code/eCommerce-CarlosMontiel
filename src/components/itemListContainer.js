@@ -1,102 +1,71 @@
-//import { collection,getFirestore ,getDocs } from "firebase/firestore";
 import { useState, useEffect } from "react";
+import { collection ,getDocs ,query ,where} from "firebase/firestore";
 import { useParams } from "react-router-dom";
+import { db } from './firebase/FirebaseCon'
 import ItemList from "./ItemList";
-import { useAppContext } from "./context/AppContext";
 
 const ListaContendor =()=> {  
 
-  const [ category, setCategory ] = useState();
   const {categoryId} = useParams();
-  const { products } = useAppContext();
-  
-  useEffect(()=>{
-
-    if (categoryId === undefined) {  setCategory(products)  }
-    else { setCategory( products.filter( item => item.category === categoryId ) ); }
+  const [ items, setItems  ] = useState();
 
 
-    /*
-    const db = getFirestore();
-    const itemColec = collection(db ,'items');
-    const getItemRef = async ()=>{
-      const data = await getDocs(itemColec)
-      if (data.size ===0) {
-          console.log('sin resultados')
-      }
-      setCategory(data.docs.map((item)=>
-        ({...item.data(),id: item.id})
-      ))
-    }
-    getItemRef();
-
+  // changes background elements dynamically
+  const getBgContext = (id) => {
+    switch (id) {
+      case 'part':  return {
+          title : 'Respuestos y Partes',
+          bgImg : 'https://images.pexels.com/photos/1476318/pexels-photo-1476318.jpeg?auto=compress&&fit=crop&w=1241&q=2'
+        }
     
-    if ( categoryId === undefined ) {
-      getDocs(itemColec).then( (snapshot) => { 
-        setCategory(snapshot.docs.map((doc)=>({
-        category : doc.category  ,
-        title : doc.title,
-        price : doc.price,
-        desc  : doc.desc,
-        stock : doc.stock,
-        }))) 
+      case 'car':  return {
+          title : 'Compra de Vehiculos',
+          bgImg : 'https://images.pexels.com/photos/3849555/pexels-photo-3849555.jpeg?&auto=format&fit=crop&w=1241&q=2'
+        }
 
-        
-     
-        console.log(snapshot.docs);
-      })
+      case 'misc':  return {
+          title : 'Accesorios para Vehiculos',
+          bgImg : 'https://images.pexels.com/photos/4987540/pexels-photo-4987540.jpeg?&auto=format&fit=crop&w=1241&q=2'
+        }
+    
+      default:   return {
+        title : 'Bienvenidos',
+        bgImg : 'https://images.pexels.com/photos/63294/autos-technology-vw-multi-storey-car-park-63294.jpeg?auto=compress&&fit=crop&w=1241&q=2'
+      }
     }
-    else { 
-      getDocs(itemColec).then( resp=>
-        resp.filter((product) => product.category === categoryId)
-        )
-    }*/
-  },[categoryId,products])
+  } 
 
-  console.log(category);
+  const bgElems = getBgContext(categoryId)
 
-  const checkTitle = () => {
-      switch (categoryId) {
-        case 'part':
-            return 'Respuestos y Partes'
-      
-        case 'car':
-            return 'Compra de Vehiculos'
-      
-        case 'misc':
-            return 'Accesorios para Vehiculos'
-      
-        default:
-          return 'Bienvenidos'
-      }
-  }
+  // get Items data 
+  useEffect(()=>{
+    const getItemsData = async () => {
 
-  const checkBg = () => {
-      switch (categoryId) {
-        case 'part':
-            return 'https://images.pexels.com/photos/1476318/pexels-photo-1476318.jpeg?auto=compress&&fit=crop&w=1241&q=2'
-      
-        case 'car':
-            return 'https://images.pexels.com/photos/3849555/pexels-photo-3849555.jpeg?&auto=format&fit=crop&w=1241&q=2'
-      
-        case 'misc':
-            return 'https://images.pexels.com/photos/4987540/pexels-photo-4987540.jpeg?&auto=format&fit=crop&w=1241&q=2'
-      
-        default:
-          return 'https://images.pexels.com/photos/63294/autos-technology-vw-multi-storey-car-park-63294.jpeg?auto=compress&&fit=crop&w=1241&q=2'
-      }
-  }
+      const itemsCollection = categoryId ? 
+        query(collection( db ,'items') , where('category','==',categoryId)) :
+        collection( db ,'items');
 
-  const bgimg = checkBg();
-  const heroTitle = checkTitle();
+      const querySnapshot = await getDocs(itemsCollection)
+
+      setItems(
+        querySnapshot.docs.map((i) => {
+          const obj ={...i.data() ,id: i.id };
+          return obj
+        })
+      )
+    }
+
+    getItemsData(); 
+    
+  },[categoryId])
   
-  return (<>
-    <div className="hero min-h-screen" style={{backgroundImage: `url(${bgimg})`,
-    }}>
+  return (
+  <>
+    <div className="hero min-h-screen" style={{backgroundImage: `url(${bgElems.bgImg})`}}>
       <div className="hero-overlay bg-opacity-60"></div>
       <div className="hero-content text-center text-neutral-content">
         <div className="max-w-md">
-          <h1 className="mb-5 text-5xl font-bold">{heroTitle} </h1>
+          <h1 className="mb-5 text-5xl font-bold">{bgElems.title} </h1>
           <span> 
 
           </span>
@@ -106,16 +75,14 @@ const ListaContendor =()=> {
       </div>
     </div>
 
-
-
-    <div className='card card-compact w-11/12 mx-auto my-5 text-secondary-content rounded-lg bg-secondary shadow-xl flex'>
+    <div className='container mx-auto w-full text-secondary-content'>
         <div className="card-body">
             <h2 className="card-title">
                 ARTICULOS DISPONIBLES
             </h2>
             <div className="divider"></div>
-            <ul className="flex flex-wrap" >
-              <ItemList className="m-5 p-5" category={category}  />
+            <ul >
+              <ItemList className="m-5 p-5 " category={items}  />
             </ul>
         </div>        
     </div>

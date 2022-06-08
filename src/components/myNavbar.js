@@ -1,18 +1,19 @@
 import { Link } from "react-router-dom";
-import menu from './svg/MenuIcon.svg' 
 import CartWidget from "./CartWidget";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 const NavBar =()=>{
     return (  
-    <div className="navbar z-50 rounded-b-lg bg-accent ">
+    <div className="navbar bg-slate-100 drop-shadow-lg z-50">
       <div className="navbar-start">
         
         <div className="dropdown">
-          <label tabIndex="0" className="btn btn-info rounded-full gap-2" data-bs-toggle="tooltip" title="Categorias">
-            <img src={menu} alt={'menu'} className="h-5 w-5" ></img>
-            CATEGORIAS
+          <label tabIndex="0" className="btn btn-primary rounded-full gap-2" data-bs-toggle="tooltip" title="Categorias">
+            <FontAwesomeIcon icon={faBars} className="h-5 w-5" ></FontAwesomeIcon>
+            <div className="md:block hidden text-primary-content"> CATEGORIAS </div>
           </label>
-          <ul tabIndex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+          <ul tabIndex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 w-64 rounded-box ">
             <li><Link to='/category/car' > Vehiculos  </Link></li>
             <li><Link to='/category/part'> Respuesto y Partes   </Link></li>
             <li><Link to='/category/misc'> Accesorios para Vehiculos  </Link></li>
@@ -21,10 +22,8 @@ const NavBar =()=>{
         
       </div>
       <div className="navbar-center">
-        <Link  to='/' className="normal-case gap-2 text-center text-4xl " data-bs-toggle="tooltip" title="Tienda de Respuesto">
-          Repuestos 
-         de vehiculos 
-           
+        <Link  to='/' className="normal-case gap-2 text-center md:text-4xl text-2xl text-secondary-content" data-bs-toggle="tooltip" title="Tienda de Respuesto">
+          Tienda de Repuestos
         </Link>
       </div>
       <div className="navbar-end">

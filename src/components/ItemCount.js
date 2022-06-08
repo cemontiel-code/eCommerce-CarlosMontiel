@@ -1,14 +1,9 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMinus,faPlus } from '@fortawesome/free-solid-svg-icons'
 import React, { useState } from 'react'
-import { useCartContext } from './context/CartContext';
-import { useAppContext } from './context/AppContext';
 
-const ItemCount = ({ stock, onAdd, id }) => {
-	const [count, setCount] = useState(0)
-
-	const { addToCart } = useCartContext()
-	const { products } = useAppContext()
-
-	
+const ItemCount = ({ stock, onAdd , id }) => {
+	const [count, setCount] = useState(1)
 
 	const handleAdd = () => {
 		if (count < stock) {
@@ -21,32 +16,24 @@ const ItemCount = ({ stock, onAdd, id }) => {
 		}
 	}
 
-	const handleClick = (id, cantidad) => {
-		const findProduct = products.find((producto) => producto.id === id)
-
-		if (!findProduct) {
-			alert("Error en la base de datos")
-			return
-		}
-
-		addToCart(findProduct, cantidad)
-		onAdd(count)
+	const handleClick = (cantidad) => {
+		onAdd(cantidad)
 	}
 
 	return (
-        <div className='card p-2 md:w-2/4 bg-base text-white'>
+        <div className='card p-2 bg-base text-white'>
             <div className='btn-group'>
-                    <button className='btn btn-error text-black w-3/12    rounded-l-full text-4xl' onClick={handleRemove}>
-                         -
+                    <button className='btn btn-error text-black w-3/12    rounded-l-full text-xl' onClick={handleRemove}>
+                         <FontAwesomeIcon icon={faMinus}></FontAwesomeIcon>
                     </button>
-                    <strong className='btn btn-ghost text-black  w-6/12 h-3/4 text-center bg-white p-1' > {count} </strong>
-                    <button className='btn btn-success text-black w-3/12  rounded-r-full text-4xl ' onClick={handleAdd}>
-                        +
+                    <strong className='btn no-animation text-black hover:bg-white  w-6/12  text-center bg-white p-1' > {count} </strong>
+                    <button className='btn btn-success text-black w-3/12  rounded-r-full text-xl ' onClick={handleAdd}>
+					<FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
                     </button>
             </div>
 			<div className='divider'></div>
             <div className='flex justify-center'>
-                <button className='btn btn-square rounded-xl w-11/12' onClick={ ()=>{handleClick(id, count)} }>
+                <button className='btn btn-square rounded-xl w-11/12' onClick={ ()=>{handleClick(count)} }>
                     Agregar cantidad al carrito
                 </button>
             </div>
